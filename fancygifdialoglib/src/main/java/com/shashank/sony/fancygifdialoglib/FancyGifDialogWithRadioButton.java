@@ -29,6 +29,7 @@ public class FancyGifDialogWithRadioButton {
     RadioGroup radioButtonGroup;
     int numberOfRadioButton;
     List<String> radioButtonList = new ArrayList<>();
+    Typeface radioFont;
 
     private FancyGifDialogWithRadioButton(FancyGifDialogWithRadioButton.Builder builder) {
         this.title = builder.title;
@@ -44,17 +45,20 @@ public class FancyGifDialogWithRadioButton {
         this.cancel = builder.cancel;
         this.radioButtonGroup = builder.radioButtonGroup;
         this.radioButtonList = builder.radioButtonList;
+        this.radioFont = builder.radioFont;
     }
 
 
     public static class Builder {
-        private String title, message, positiveBtnText, negativeBtnText, pBtnColor, nBtnColor, btnRadio1, btnRadio2, btnRadio3;
+        private String title, message, positiveBtnText, negativeBtnText, pBtnColor, nBtnColor;
         private Activity activity;
         private FancyGifDialogRadioListener pListener, nListener;
         private boolean cancel;
         int gifImageResource;
         RadioGroup radioButtonGroup;
         List<String> radioButtonList = new ArrayList<>();
+        Typeface radioFont;
+
 
         public Builder(Activity activity) {
             this.activity = activity;
@@ -66,14 +70,13 @@ public class FancyGifDialogWithRadioButton {
         }
 
 
-        public FancyGifDialogWithRadioButton.Builder setRadioButtonList(List<String> radioButtonList ) {
+        public FancyGifDialogWithRadioButton.Builder setRadioButtonList(List<String> radioButtonList) {
             this.radioButtonList = radioButtonList;
             return this;
         }
 
-
-        public FancyGifDialogWithRadioButton.Builder setRadioText(String btnRadio1) {
-            this.btnRadio1 = btnRadio1;
+        public FancyGifDialogWithRadioButton.Builder setRadioButtonFont(Typeface radioFont) {
+            this.radioFont = radioFont;
             return this;
         }
 
@@ -150,8 +153,11 @@ public class FancyGifDialogWithRadioButton {
             for (int i = 0; i < radioList.size(); i++) {
                 RadioButton rb = new RadioButton(activity); // dynamically creating RadioButton and adding to RadioGroup.
                 rb.setText(radioList.get(i));
-                Typeface font =   Typeface.createFromAsset(activity.getAssets(), "fonts/vazir.ttf");
-                rb.setTypeface(font);
+
+                if(radioFont !=null){
+                    rb.setTypeface(radioFont);
+                }
+
                 radioButtonGroup.addView(rb);
             }
 
