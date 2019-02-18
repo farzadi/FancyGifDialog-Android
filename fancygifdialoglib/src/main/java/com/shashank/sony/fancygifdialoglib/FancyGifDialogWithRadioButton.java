@@ -3,6 +3,7 @@ package com.shashank.sony.fancygifdialoglib;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.view.View;
@@ -144,10 +145,13 @@ public class FancyGifDialogWithRadioButton {
                 radioList.add(radioButtonList.get(i));
 
             }
+
             radioButtonGroup = (RadioGroup) dialog.findViewById(R.id.radio_group);
             for (int i = 0; i < radioList.size(); i++) {
                 RadioButton rb = new RadioButton(activity); // dynamically creating RadioButton and adding to RadioGroup.
                 rb.setText(radioList.get(i));
+                Typeface font =   Typeface.createFromAsset(activity.getAssets(), "fonts/vazir.ttf");
+                rb.setTypeface(font);
                 radioButtonGroup.addView(rb);
             }
 
