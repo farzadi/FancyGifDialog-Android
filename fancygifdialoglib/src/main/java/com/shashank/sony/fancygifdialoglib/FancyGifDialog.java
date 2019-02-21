@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -24,6 +25,7 @@ public class FancyGifDialog {
     private FancyGifDialogListener pListener,nListener;
     private boolean cancel;
     int gifImageResource;
+    int textAlignment = Gravity.CENTER;
 
 
     private FancyGifDialog(Builder builder){
@@ -38,6 +40,7 @@ public class FancyGifDialog {
         this.negativeBtnText=builder.negativeBtnText;
         this.gifImageResource=builder.gifImageResource;
         this.cancel=builder.cancel;
+        this.textAlignment = builder.textAlignment;
     }
 
 
@@ -47,6 +50,7 @@ public class FancyGifDialog {
         private FancyGifDialogListener pListener,nListener;
         private boolean cancel;
         int gifImageResource;
+        int textAlignment = Gravity.CENTER;
 
         public Builder(Activity activity){
             this.activity=activity;
@@ -61,6 +65,13 @@ public class FancyGifDialog {
             this.message=message;
             return this;
         }
+
+        public Builder setMessageTextAlignment(int textAlignment){
+            this.textAlignment= textAlignment;
+            return this;
+        }
+
+
 
         public Builder setPositiveBtnText(String positiveBtnText){
             this.positiveBtnText=positiveBtnText;
@@ -127,6 +138,7 @@ public class FancyGifDialog {
 
             title1.setText(title);
             message1.setText(message);
+            message1.setGravity(textAlignment);
             if(positiveBtnText!=null)
             pBtn.setText(positiveBtnText);
             if(negativeBtnText!=null)
